@@ -46,6 +46,15 @@ public class WSPerson {
         resource = resource.path(java.text.MessageFormat.format("{0}", new Object[]{id}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
+    
+    public <T> T findTeacherList_XML(Class<T> responseType, boolean isTeacher) throws ClientErrorException {
+        
+        WebTarget resource = webTarget;
+        resource = resource.queryParam("isTeacher", isTeacher);
+        resource = resource.path("teacherList");
+        
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
 
     public <T> T find_JSON(Class<T> responseType, String id) throws ClientErrorException {
         WebTarget resource = webTarget;

@@ -110,7 +110,7 @@ public class Section implements Serializable {
     @Override
     public String toString() {
         return "entity.Section[ "
-                + "Id = " + sectionId 
+                + "id = " + sectionId 
                 + "  | name = " + name
                 + "  | teacher = " + teacher.getLastName()
                 + "  | description = " + description

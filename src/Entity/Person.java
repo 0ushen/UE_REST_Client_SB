@@ -238,19 +238,19 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Person{" + 
-                "id=" + personId + 
-                ", firstName=" + firstName + 
-                ", lastName=" + lastName + 
-                ", country=" + country + 
-                ", city=" + city + 
-                ", postalCode=" + postalCode + 
-                ", address=" + address + 
-                ", dateOfBirth=" + dateOfBirth + 
-                ", email=" + email + 
-                ", isTeacher=" + isTeacher + 
-                ", mobile=" + mobile +
-                '}';
+        return "entity.Person[ " +
+                "id = " + personId + 
+                "  | firstName = " + firstName + 
+                "  | lastName = " + lastName + 
+                "  | country = " + country + 
+                "  | city = " + city + 
+                "  | postalCode = " + postalCode + 
+                "  | address = " + address + 
+                "  | dateOfBirth = " + dateOfBirth + 
+                "  | email = " + email + 
+                "  | isTeacher = " + isTeacher + 
+                "  | mobile = " + mobile +
+                " ]\n";
     }
     
 }
