@@ -5,11 +5,10 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
 /**
- * Jersey REST client generated for REST resource:SectionFacadeREST
- * [section]<br>
+ * Jersey REST client generated for REST resource:PersonFacadeREST [person]<br>
  * USAGE:
  * <pre>
- *        WSSection client = new WSSection();
+ *        WSPerson client = new WSPerson();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
@@ -17,15 +16,15 @@ import javax.ws.rs.client.WebTarget;
  *
  * 
  */
-public class WSSection {
+public class WSPerson {
 
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/admin-starter/webresources";
 
-    public WSSection() {
+    public WSPerson() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("section");
+        webTarget = client.target(BASE_URI).path("person");
     }
 
     public String countREST() throws ClientErrorException {
@@ -45,12 +44,6 @@ public class WSSection {
     public <T> T find_XML(Class<T> responseType, String id) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path(java.text.MessageFormat.format("{0}", new Object[]{id}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-    
-    public <T> T findByName_XML(Class<T> responseType, String name) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("search/{0}", new Object[]{name}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 

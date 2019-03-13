@@ -23,6 +23,14 @@ public class Section implements Serializable {
 
     public Section() {
     }
+
+    public Section(String description, String name, Person teacher) {
+        this.description = description;
+        this.name = name;
+        this.teacher = teacher;
+    }
+    
+    
     
     public Section(Section section) {
         
@@ -106,7 +114,7 @@ public class Section implements Serializable {
                 + "  | name = " + name
                 + "  | teacher = " + teacher.getLastName()
                 + "  | description = " + description
-                + " ]";
+                + " ]\n";
     }
     
 }
