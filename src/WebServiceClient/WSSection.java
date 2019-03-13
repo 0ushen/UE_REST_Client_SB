@@ -1,5 +1,6 @@
 package WebServiceClient;
 
+import entity.Section;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
@@ -48,9 +49,17 @@ public class WSSection {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
     
-    public <T> T findByName_XML(Class<T> responseType, String name) throws ClientErrorException {
+    public <T> T findByEntity_XML(Class<T> responseType, Section s) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("search/{0}", new Object[]{name}));
+        if(s.getName() != null & !"".equals(s.getName()))
+            resource= resource.queryParam("name", s.getName());
+        if(s.getDescription() != null & !"".equals(s.getDescription()))
+            resource= resource.queryParam("description", s.getDescription());
+        if(s.getTeacher() != null)
+            resource= resource.queryParam("teacherId", s.getTeacher().getPersonId());
+        
+        resource = resource.path("search");
+        
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 

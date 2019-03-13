@@ -35,8 +35,10 @@ public class REST_Client_SB {
     
     public static void findSectionByName(String name) {
         
+        Section s = new Section();
+        s.setName(name);
         GenericType<List<Section>> gType = new GenericType<List<Section>>() {};
-        Response response = clientSection.find_XML(Response.class, name);
+        Response response = clientSection.findByEntity_XML(Response.class, s);
         sectionList = response.readEntity(gType);
     }
     
@@ -67,6 +69,7 @@ public class REST_Client_SB {
                     for(Section s : sectionList) {
                         System.out.println(s);
                     }
+                    System.out.println("---------END---------\n");
                     
                     break;
                     
@@ -83,6 +86,7 @@ public class REST_Client_SB {
                             findSectionById(uInput21);
                             System.out.println("---------RESULTS---------\n");
                             System.out.println(section);
+                            System.out.println("---------END---------\n");
                             
                             break;
                         
@@ -92,6 +96,7 @@ public class REST_Client_SB {
                             findSectionByName(uInput22);
                             System.out.println("---------RESULTS---------\n");
                             System.out.println(sectionList);
+                            System.out.println("---------END---------\n");
                             
                             break;
                             
