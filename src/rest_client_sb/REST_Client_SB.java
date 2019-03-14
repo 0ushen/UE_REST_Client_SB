@@ -77,6 +77,24 @@ public class REST_Client_SB {
         clientSection.edit_XML(s, s.getSectionId().toString());
     }
     
+    public static void remove (Section s) {
+        clientSection.remove(s.getSectionId().toString());
+    }
+    
+    public static <T> void printList(List<T> list) {
+        System.out.println("---------RESULTS---------\n");
+        for(Object o  : list) {
+            System.out.println(o);
+        }
+        System.out.println("---------END---------\n");
+    }
+    
+    public static <T> void printObject(T o) {;
+        System.out.println("---------RESULTS---------\n");
+        System.out.println((Object) o);
+        System.out.println("---------END---------\n");
+    }
+    
     
     /**
      * @param args the command line arguments
@@ -98,16 +116,12 @@ public class REST_Client_SB {
             
             switch(uInput){
                 
-                case "1" : 
-                    System.out.println("---------LIST OF SECTIONS---------\n");
-                    for(Section s : findAllSections()) {
-                        System.out.println(s);
-                    }
-                    System.out.println("---------END---------\n");
+                case "1" : // Show All sections
+                    printList(findAllSections());
                     
                     break;
                     
-                case "2" : 
+                case "2" : // Search a specific section
                     System.out.print("Select an option\n" + 
                             "1.Search with an id\n" + 
                             "2.Search with a name\n");
@@ -117,20 +131,14 @@ public class REST_Client_SB {
                         case "1" : 
                             System.out.println("Enter id : ");
                             String uInput21 = userInput.nextLine();
-                            System.out.println("---------RESULTS---------\n");
-                            System.out.println(findSectionById(uInput21));
-                            System.out.println("---------END---------\n");
+                            printObject(findSectionById(uInput21));
                             
                             break;
                         
                         case "2" : 
                             System.out.println("Enter name : ");
                             String uInput22 = userInput.nextLine();
-                            System.out.println("---------RESULTS---------\n");
-                            for(Section s : findSectionByName(uInput22)) {
-                                System.out.println(s);
-                            }
-                            System.out.println("---------END---------\n");
+                            printList(findSectionByName(uInput22));
                             
                             break;
                             
@@ -140,7 +148,7 @@ public class REST_Client_SB {
                     
                     break;
                 
-                case "3" : 
+                case "3" : // Create a section
                     section = new Section();
                     
                     System.out.print("Name of section : ");
@@ -150,11 +158,7 @@ public class REST_Client_SB {
                     System.out.print("Teacher responsible for this section (id) : (type tList for a list of teachers)\n");
                     uInput3 = userInput.nextLine();
                     while("tList".equals(uInput3)) {
-                        System.out.println("---------LIST OF TEACHERS---------\n");
-                        for(Person p : findTeacherList()) {
-                            System.out.println(p);
-                        }
-                        System.out.println("---------END---------\n");
+                        printList(findTeacherList());
                         System.out.print("Teacher responsible for this section (id) : ");
                         uInput3 = userInput.nextLine();
                     }
@@ -171,19 +175,14 @@ public class REST_Client_SB {
                                     
                     break;
                     
-                case "4" : 
+                case "4" : // Update a section
                     System.out.print("choose a section to update (id) : (type sList to see a list of all sections)\n");
                     String uInput4 = userInput.nextLine();
                     while("sList".equals(uInput4)){
-                        System.out.println("---------LIST OF SECTIONS---------\n");
-                        for(Section s : findAllSections()) {
-                            System.out.println(s);
-                        }
-                        System.out.println("---------END---------\n");
+                        printList(findAllSections());
                         System.out.print("choose a section to update (id) : ");
                         uInput4 = userInput.nextLine();
                     }
-                    
                     section = findSectionById(uInput4);
                     
                     System.out.println("This is your section : \n" + 
@@ -192,23 +191,20 @@ public class REST_Client_SB {
                             "3. Description : " + section.getDescription() + "\n" + 
                             "Which field do you want to change ? : ");
                     uInput4 = userInput.nextLine();
+                    
                     switch(uInput4) {
-                        case "1" :
+                        case "1" : // Name
                             System.out.print("Enter a new name : ");
                             String uInput41 = userInput.nextLine();
                             section.setName(uInput41);
                             
                             break;
                         
-                        case "2" :
+                        case "2" : // Teacher
                             System.out.print("Choose a new teacher (id) : (type tList to show a list of teachers)");
                             String uInput42 = userInput.nextLine();
                             while("tList".equals(uInput42)) {
-                                System.out.println("---------LIST OF TEACHERS---------\n");
-                                for(Person p : findTeacherList()) {
-                                    System.out.println(p);
-                                }
-                                System.out.println("---------END---------\n");
+                                printList(findTeacherList());
                                 System.out.print("Teacher responsible for this section (id) : ");
                                 uInput42 = userInput.nextLine();
                             }
@@ -217,7 +213,7 @@ public class REST_Client_SB {
                             
                             break;
                         
-                        case "3" : 
+                        case "3" : // Description
                             System.out.print("Enter a new description : ");
                             String uInput43 = userInput.nextLine();
                             section.setDescription(uInput43);
@@ -233,8 +229,25 @@ public class REST_Client_SB {
                     
                     break;
                     
-                case "0" : 
+                case "5" : // Remove a section
+                    System.out.print("choose a section to delete (id) : (type sList to see a list of all sections)\n");
+                    String uInput5 = userInput.nextLine();
+                    
+                    while("sList".equals(uInput5)){
+                        printList(findAllSections());
+                        System.out.print("choose a section to delete (id) : ");
+                        uInput5 = userInput.nextLine();
+                    }
+                    section = findSectionById(uInput5);
+                    
+                    remove(section);
+                    System.out.print("Section : " + section.getName() + " successfully deleted.\n");
+                    
+                    break;
+                    
+                case "0" : // Exit the application
                     System.out.print("Closing the application...\nGoodbye!\n");
+                    
                     break;
                     
                 default :
