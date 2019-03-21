@@ -20,7 +20,7 @@ public class WSPerson {
 
     private WebTarget webTarget;
     private Client client;
-    private static final String BASE_URI = "http://localhost:8080/admin-starter/webresources";
+    private static final String BASE_URI = "http://35.180.119.33:8080/UE_PrimeFaces_SB/webresources";
 
     public WSPerson() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
